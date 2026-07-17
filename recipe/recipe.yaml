@@ -27,7 +27,7 @@ requirements:
       then: maturin >=1.0,<2.0
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
-    - ${{ compiler('rust') }}
+    - ${{ compiler('rust') }} <1.97
     - if: win
       then: posix
     - cmake
