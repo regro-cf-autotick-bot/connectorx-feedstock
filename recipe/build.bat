@@ -5,7 +5,11 @@ set "CMAKE_GENERATOR=NMake Makefiles"
 set OPENSSL_NO_VENDOR=1
 set "OPENSSL_DIR=%LIBRARY_PREFIX%"
 
+del /F /Q "%SRC_DIR%\connectorx-python\README.md"
+if errorlevel 1 exit 1
 copy /Y "%SRC_DIR%\README.md" "%SRC_DIR%\connectorx-python\README.md"
+if errorlevel 1 exit 1
+del /F /Q "%SRC_DIR%\connectorx-python\LICENSE"
 if errorlevel 1 exit 1
 copy /Y "%SRC_DIR%\LICENSE" "%SRC_DIR%\connectorx-python\LICENSE"
 if errorlevel 1 exit 1
