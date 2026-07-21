@@ -1,0 +1,26 @@
+@echo on
+
+chcp 65001 >NUL
+set "PYTHONIOENCODING=utf-8"
+set "PYTHONUTF8=1"
+set "PYO3_PYTHON=%PYTHON%"
+set "CMAKE_GENERATOR=NMake Makefiles"
+set OPENSSL_NO_VENDOR=1
+set "OPENSSL_DIR=%LIBRARY_PREFIX%"
+
+del /F /Q "%SRC_DIR%\connectorx-python\README.md"
+if errorlevel 1 exit 1
+copy /Y "%SRC_DIR%\README.md" "%SRC_DIR%\connectorx-python\README.md"
+if errorlevel 1 exit 1
+del /F /Q "%SRC_DIR%\connectorx-python\LICENSE"
+if errorlevel 1 exit 1
+copy /Y "%SRC_DIR%\LICENSE" "%SRC_DIR%\connectorx-python\LICENSE"
+if errorlevel 1 exit 1
+
+cd connectorx-python
+%PYTHON% -m pip install --ignore-installed --no-deps -vv .
+if errorlevel 1 exit 1
+
+cd ..
+cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+if errorlevel 1 exit 1
